@@ -1,38 +1,157 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+h2{
+  font-size: 32px;
+  text-align: center;
+}
+h2::after{
+  content: '';
+  display: block;
+  width: 250px;
+  height: 3px;
+  background-color: #DC0714;
+  margin-top: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.users__box{
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 300px;
+  justify-content: space-between;
+  padding: 10px 45px;
+  border: 2px solid #DC0714;
+  cursor: pointer;
+  margin-bottom: 15px;
 }
+.users__box.active{
+  border: 2px solid #620dc4;
+  background-color: #855cb3;
+}
+.users__box.active .helmet{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #620dc4;
+  border-radius: 50%;
+  padding: 7px;
+}
+.users__box.active .user__main h3{
+  color: #fff;
+}
+.users__box.active .user__id{
+  color: #fff;
+}
+.user__id{
+  font-size: 24px;
+  font-weight: 600;
+}
+.helmet{
+  padding: 7px;
+}
+.helmet_bg.red{
+  position: absolute;
+  top: 12px;
+  left: 100px;
+  background-color: #DC0714;
+  border-radius: 50%;
+}
+.helmet_bg.green{
+  position: absolute;
+  top: 12px;
+  left: 100px;
+  background-color: green;
+  border-radius: 50%;
+}
+.helmet_bg.blue{
+  position: absolute;
+  top: 12px;
+  left: 100px;
+  background-color: blue;
+  border-radius: 50%;
+}
+.helmet img{
+  width: 50px;
+  height: 50px;
+}
+.user__main{
+  text-align: center;
+}
+.user__main h3{
+  width: 145px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre;
+}
+.user__main .time{
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(15, 7, 59);
+}
+.user__main .speed{
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(105, 13, 13);
+}
+.loading{
+  font-size: 32px;
+}
+
+@media(max-width: 424px){
+  .users__box{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 250px;
+    justify-content: space-between;
+    padding: 7px 35px;
+    border: 2px solid #DC0714;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+  .helmet{
+    padding: 5px;
+  }
+  .helmet_bg.red{
+    position: absolute;
+    top: 12px;
+    left:55px;
+    background-color: #DC0714;
+    border-radius: 50%;
+  }
+  .helmet_bg.green{
+    position: absolute;
+    top: 12px;
+    left:55px;
+    background-color: green;
+    border-radius: 50%;
+  }
+  .helmet_bg.blue{
+    position: absolute;
+    top: 12px;
+    left:55px;
+    background-color: blue;
+    border-radius: 50%;
+  }
+  .helmet img{
+    width: 10px;
+    height: 10px;
+  }
+  .user__id{
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+}
+
