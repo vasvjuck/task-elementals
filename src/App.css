@@ -81,7 +81,7 @@ h2::after{
   background-color: blue;
   border-radius: 50%;
 }
-.helmet img{
+.helmet img {
   width: 50px;
   height: 50px;
 }
@@ -106,6 +106,7 @@ h2::after{
 }
 .loading{
   font-size: 32px;
+  color: rgb(15, 7, 59);
 }
 
 @media(max-width: 424px){

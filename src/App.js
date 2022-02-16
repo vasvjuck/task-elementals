@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { List } from 'react-virtualized';
 import './App.css';
-import { users } from './data'
+import { users } from './data';
+import helmet from './img/helmet.svg'
 
 const usersSlice = (m, n) => {
   return users.slice(m, n)
@@ -20,6 +22,7 @@ const App = () => {
 
   useEffect(() => {
     const userActive = document.querySelectorAll('.users__box')
+    const scrollList = document.querySelector('.scrollList')
 
     function setUserActive() {
       userActive.forEach(e => e.classList.remove("active"));
@@ -28,15 +31,16 @@ const App = () => {
 
     userActive.forEach(e => e.addEventListener('click', setUserActive))
 
-    document.addEventListener('scroll', scrollHandler)
+    scrollList.addEventListener('scroll', scrollHandler)
 
     return function () {
-      document.removeEventListener('scroll', scrollHandler)
+      scrollList.removeEventListener('scroll', scrollHandler)
     };
   }, [allUsers])
 
   const scrollHandler = (e) => {
-    if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
+    const scrollList = document.querySelector('.scrollList')
+    if (scrollList.scrollHeight - (scrollList.scrollTop + window.innerHeight) < 100) {
       setUpload(true)
       setArgumentOne(prev => prev + 50)
       setArgumentTwo(prev => prev + 50)
@@ -46,21 +50,40 @@ const App = () => {
   return (
     <div className="App">
       <h2>List of users</h2>
-      <div className='content'>
-        {
+      <List
+        className='scrollList'
+        width={400}
+        height={650}
+        rowHeight={150}
+        rowCount={allUsers.length}
+        rowRenderer={({ index, style }) => {
+          const data = allUsers[index]
+          return (
+            <div className='content' key={data.id} style={style}>
+              <div className="users__box" key={data.id}>
+                <p className='user__id'>{data.id}</p>
+                <div className={`helmet_bg ${data.color}`}><img className='helmet' src={helmet} alt='user' /></div>
+                <div className="user__main">
+                  <h3>{data.name}</h3>
+                  <p><span className='time'>{data.time}</span> | <span className='speed'>{data.speed}km/h</span></p>
+                </div>
+              </div>
+            </div>
+          )
+        }}
+      />
+      {/* {
           allUsers && allUsers.map((data) => (
             <div className="users__box" key={data.id}>
               <p className='user__id'>{data.id}</p>
-              <div className={`helmet_bg ${data.color}`}><img className='helmet' src="https://raw.githubusercontent.com/ElementalsWeb/frontend-task/1e504c0f4960d48f49403d1c7172d2a60582ab5c/helmet.svg" alt='user' /></div>
+              <div className={`helmet_bg ${data.color}`}><img className='helmet' src={helmet} alt='user' /></div>
               <div className="user__main">
                 <h3>{data.name}</h3>
                 <p><span className='time'>{data.time}</span> | <span className='speed'>{data.speed}km/h</span></p>
               </div>
             </div>
           ))
-        }
-        {upload && <div className='loading'>Loading...</div>}
-      </div>
+        } */}
     </div>
   );
 }
